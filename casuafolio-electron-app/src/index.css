@@ -1,0 +1,195 @@
+html { /*
+NOTE: the background is set in index.js, not here
+  */
+  background-color: #1D1D1D;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+    padding-top: 1em;
+    padding-left: 2em;
+}
+
+button {
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  will-change: box-shadow, transform;
+  background: radial-gradient(100% 100% at 100% 0%, #a00491 0%, #5468FF 100%);
+  box-shadow: 0px 2px 4px rgba(45, 35, 66, 0.4), 0px 7px 13px -3px rgba(45, 35, 66, 0.3), inset 0px -3px 0px rgba(58, 65, 111, 0.5);
+  padding: 0 32px;
+  border-radius: 6px;
+  color: #fff;
+  height: 48px;
+  font-size: 18px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+button:hover {
+  box-shadow: 0px 4px 8px rgba(102, 38, 110, 0.387), 0px 7px 13px -3px rgba(39, 28, 71, 0.3), inset 0px -3px 0px #3c4fe0;
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: inset 0px 2px 7px #a237d1;
+  transform: translateY(2px);
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns items to the left */
+  justify-content: center;
+  padding: 20px; /* Adds padding between items */
+}
+
+h1 {
+  color:aliceblue;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+
+
+
+
+
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #348ddb;
+  color:aliceblue;
+  width: 6em;
+  height: 6em;
+  -webkit-animation: spin 1.5s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+  margin: 3em;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loadingSpinner {
+  display: block;
+  margin-bottom: 0.3em; /* Adjust space between spinner and text */
+}
+
+#loadingText {
+  display: block;
+  color: aliceblue;
+  font-size: large;
+  text-align: center;
+}
+
+
+
+
+#back {
+  z-index: 1; /* Lower z-index, will be behind */
+}
+
+#front {
+  z-index: 2; /* Higher z-index, will be in front */
+}
+
+
+.spinner-container {
+  display: none; /* switch to 'flex' when building*/
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Changed to fixed to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(81, 33, 166, 0.7);
+  z-index: 100; /* Ensure it's above other content */
+}
+
+
+
+
+
+
+
+
+#npm-not-installed-warning-container {
+  display: none; /* switch to 'flex' when building*/
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Changed to fixed to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(81, 33, 166, 0.7);
+  z-index: 100; /* Ensure it's above other content */
+}
+
+#npm-not-installed-warning-box {
+  display: none; /* Hidden by default; JavaScript will change this if npm is not detected */
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffcccb; /* Light red background */
+  color: black; /* Text color */
+  border-left: 5px solid #ff0000; /* Red border on the left for emphasis */
+}
+
+
+#npm-not-installed-warning-container p {
+  margin: 0;
+  font-size: 16px; /* Adjust based on your design */
+}
+
+#npm-not-installed-warning-container a {
+  color: #007bff; /* Adjust link color based on your design */
+}
+
+
+
+
+
+
+
+
+
+
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Align items on opposite ends */
+  align-items: center; /* Center items vertically */
+  padding: 10px; /* Add some padding around the container */
+}
+
+
+.nav-button {
+  background-color: #23232396;
+  color: #ffffff; /* White */
+  padding: 10px 20px;
+  text-decoration: none; /* Removes underline from link */
+  border-radius: 5px;
+  margin-right: 20px; /* Gives some space between the Back button and title */
+  display: inline-flex; /* Allows the button and title to be on the same line */
+  align-items: center; /* Centers text and icon vertically */
+}
+
+.nav-button:hover {
+  background-color:#53187378; /* Darker green on hover */
+}
+
+#quit-button {
+  z-index: 101;/*to be in front of the warning message */
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CasuaFolio Builder - Personalize</title>
+<style>
+.split_html, .split_body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrolling on the body */
+  }
+  .split-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Prevents scrolling on the container */
+  }
+
+  .left, .right {
+    width: 50%;
+    height: 100vh;
+    overflow: hidden; /* Prevents scrolling on left and right divs */
+
+  }
+  .left {
+    overflow: auto;
+
+
+    padding-bottom: 8em;
+
+    padding-left: 2em;
+    padding-right: 2em;
+
+  }
+  .right {
+    z-index: 10;
+  }
+
+  iframe {
+    border: none; /* Removes iframe border */
+    width: 100%;
+    height: 100vh; /* Sets iframe height to the height of the viewport */
+  }
+  iframe a {
+    pointer-events: none;
+    cursor: default;
+}
+
+</style>
+
+
+</head>
+<body>
+<div class="split-container">
+  <div class="left">
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="split_html">
+<head>
+    <meta charset="UTF-8">
+    <title>Personalize</title>
+    <link rel="stylesheet" href="personalize.css">
+    <script defer src="render.js"></script>
+    
+    <script defer src="personalize_scripts/event_management.js"></script> <!-- Reference to your JS file -->
+    <script defer src="personalization_main.js"></script> <!-- Reference to your JS file -->
+</head>
+<body class="split_body">
+    <nav class="navigation-bar">
+        <a href="index.html" id="back-button" class="nav-button">
+            <img src="icons8-back-96.png" alt="Back" width="50"> Back
+        </a>
+        <h1>Personalize Your Settings 🎨</h1>
+    </nav>
+    
+    
+    <nav class="undo-redo"> <!-- TODO: implement undo/redo functionality integrated with file operations. for now, buttons are hidden -->
+        <button id="undoButton" style="display:none;">Undo Save</button>
+        <button id="redoButton" style="display:none;">Redo Save</button>
+    </nav>
+
+    <div id="personalizationForm">
+
+
+
+        <fieldset>
+            <legend>Basic Info ℹ️</legend>
+            
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName"><br>
+
+            <label for="siteTitle">Site Title:</label>
+            <input type="text" id="siteTitle" name="siteTitle"><br>
+
+            <label for="metaDescription">Meta Description:</label>
+            <input type="text" id="metaDescription" name="metaDescription"><br>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Social Links 🔗</legend>
+            
+            <label for="youtubeLink">YouTube:</label>
+            <input type="text" id="youtubeLink" name="youtubeLink" title="Example: https://www.youtube.com/yourusername">
+
+            <label for="linkedinLink">LinkedIn:</label>
+            <input type="text" id="linkedinLink" name="linkedinLink" title="Example: https://www.linkedin.com/in/yourusername">
+
+            <label for="githubLink">GitHub:</label>
+            <input type="text" id="githubLink" name="githubLink" title="Example: https://github.com/yourusername">
+
+            <label for="twitterLink">X (Twitter):</label>
+            <input type="text" id="twitterLink" name="twitterLink" title="Example: https://twitter.com/yourusername">
+            
+            <label for="instagramLink">Instagram:</label>
+            <input type="text" id="instagramLink" name="instagramLink" title="Example: https://www.instagram.com/yourusername">
+        </fieldset>
+
+        <fieldset>
+            <legend>CV and Tab Names</legend>
+
+            <label for="resumeLocation">CV/Resume :</label>
+            <div id="resumeLocation" name="resumeLocation" style="visibility:hidden;"></div>
+
+            <button id="resumePicker-btn">Select CV/Resume</button>
+            <br>
+
+            <div id="resumePreviewer-div">
+              <!-- to be filled via picker button-->
+            </div>
+
+            <br>
+            <br>
+
+            <label for="aboutTabName">About Tab Name:</label>
+            <input type="text" id="aboutTabName" name="aboutTabName"><br>
+
+            <label for="experienceTabName">Tab 1 Name:</label>
+            <input type="text" id="experienceTabName" name="experienceTabName"><br>
+
+            <label for="projectsTabName">Tab 2 Name:</label>
+            <input type="text" id="projectsTabName" name="projectsTabName"><br>
+
+            <label for="volunteerTabName">Tab 3 Name:</label>
+            <input type="text" id="volunteerTabName" name="volunteerTabName"><br>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Page Headlines 🖊️</legend>
+
+            <label for="experiencePageHeadline">Tab 1 Page Headline:</label>
+            <input type="text" id="experiencePageHeadline" name="experiencePageHeadline"><br>
+
+            <label for="projectsPageHeadline">Tab 2 Page Headline:</label>
+            <input type="text" id="projectsPageHeadline" name="projectsPageHeadline"><br>
+
+            <label for="volunteerPageHeadline">Tab 3 Page Headline:</label>
+            <input type="text" id="volunteerPageHeadline" name="volunteerPageHeadline"><br>
+        </fieldset>
+
+        <!-- Dynamic Fields -->
+        <fieldset>
+            <legend>Tab 1 Events</legend>
+            <div id="experienceEvents">
+
+            </div>
+            <!-- To be populated by JavaScript -->
+        </fieldset>
+
+        <fieldset>
+          <legend>Tab 2 Events</legend>
+          <div  id="projectEvents">
+
+              
+          </div>
+          <!-- To be populated by JavaScript -->
+      </fieldset>
+
+        <fieldset>
+            <legend>Tab 3 Events</legend>
+            <div id="volunteerEvents">
+
+
+            </div>
+            <!-- To be populated by JavaScript -->
+        </fieldset>
+
+
+        <fieldset>
+          <legend>About Section 👤</legend>
+          <div  id="aboutSectionInputs">
+            <!-- To be populated by JavaScript -->
+          </div>
+          <label for="greeting">Greeting:</label>
+          <input type="text" id="greeting" name="greeting"><br>
+
+          <label for="aboutText">About Text:</label>
+          <textarea id="aboutText" name="aboutText" rows="4" cols="50"></textarea><br>
+      </fieldset>
+
+    </div>
+
+    <footer>
+        <button id="save-changes-btn">Save Changes</button>
+    </footer>
+
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <div class="right">
+    <iframe id="live-preview-iframe" src="http://localhost:3000/"></iframe>
+  </div>
+</div>
+
+
+</body>
+</html>

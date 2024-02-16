@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>CasuaFolio Builder - Main Menu</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="tooltip.css" />
+
+  <script defer src="render.js"></script>
+
+
+</head>
+
+<body>
+  <div>
+    <div class="content" id="back">
+      <div class="header-container">
+        <h1>Customize Your Web Portfolio</h1>
+        <a href="index.html" id="quit-button" class="nav-button" >
+          <img src="icons8-quit-64.png" alt="Quit/Exit" width="50"> Quit
+        </a>
+      </div>
+
+      <div class="button-container">
+        <div class="hover-text">
+          <button id="livePreviewBtn" class="button">Preview Live</button>
+
+          <span class="tooltip-text" id="left">
+
+            Click to preview your current portfolio in real-time, as you add your information.
+            <br><br>
+            Visit <a class="highlight" href="http://localhost:3000/" target="_blank">localhost:3000</a> on your browser,
+            like Google Chrome, Safari, ...
+
+
+          </span>
+        </div>
+
+
+        <div class="hover-text">
+          <a href="personalization_split_preview.html">
+            <button id="personalizeBtn" class="button">Edit Personal Info</button>
+          </a>
+          <span class="tooltip-text" id="left">
+
+            Add or change your personal details and work experience.
+
+          </span>
+        </div>
+
+
+        <div class="build">
+          <div class="hover-text"><button id="buildBtn" class="button">Build & Download</button>
+            <span class="tooltip-text" id="left">
+
+              Complete and download your ready-to-use portfolio.
+
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="spinnerContainer" class="spinner-container">
+      <div id="front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.5em;">
+        <div id="loadingSpinner" class="loader"></div>
+        <div id="loadingText">Building...</div>
+      </div>
+    </div>
+
+
+    <div id="npm-not-installed-warning-container" style="display: none;">
+      <div id="npm-not-installed-warning-box" style="display: block;">
+        <p><strong>Warning:</strong> npm is not installed. Please install Node.js (which includes npm) from <a href="https://nodejs.org/en/download/" target="_blank">https://nodejs.org/en/download/</a> and quit CasuaFolio Builder and try again.</p>
+      </div>
+    </div>
+
+
+  
+
+
+
+  </div>
+
+
+  <script>
+
+    const { exec } = require('child_process');
+
+  exec('npm --version', (error, stdout) => {
+    if (error) {
+        // npm is not installed, inform the user or open an installation guide
+        console.error("npm is not installed. Please install Node.js and npm.");
+
+        // show a warning. div id='npm-not-installed-wanring-container', 
+        document.getElementById('npm-not-installed-warning-container').style.display = 'flex';
+
+    } else {
+        // npm is installed, proceed with your logic
+
+        //document.getElementById('npm-not-installed-warning-container').style.display = 'flex';
+
+        // show a green checkmark
+        console.log(`npm is installed, version: ${stdout.trim()}`);
+    }
+  });
+
+    const quitBtn = document.getElementById('quit-button');
+    quitBtn.onclick = e => {
+      ipcRenderer.send('quit-application');
+
+    };
+
+
+    const livePreviewBtn = document.getElementById('livePreviewBtn');
+    livePreviewBtn.onclick = e => {
+      console.log(1);
+      window.open('http://localhost:3000/', '_blank'); // This will open the URL in a new window or tab
+    };
+
+    const personalizeBtn = document.getElementById('personalizeBtn');
+    personalizeBtn.onclick = e => {
+      //  personalizeBtn.innerText = 'Recording';
+      console.log(2);
+    };
+
+
+    const buildBtn = document.getElementById('buildBtn');
+    const spinnerContainer = document.getElementById('spinnerContainer')
+    buildBtn.onclick = e => {
+      e.stopImmediatePropagation(); // to stop alert from showing up mult times
+      e.preventDefault();
+      
+      console.log(3); // Log for debugging purposes
+
+      // send some ipc message to open the dialog
+      spinnerContainer.style.display = 'flex';
+      ipcRenderer.send('open-save-dialog');
+
+      ipcRenderer.on('open-save-dialog-completed', (event, targetPath) => {
+        spinnerContainer.style.display = 'none';
+        e.stopImmediatePropagation();
+        alert(`✅ 🥳 Saved at: ${targetPath}`)
+
+      });
+
+      ipcRenderer.on('open-save-dialog-failed', (event, hideAlert, msg) => {
+        spinnerContainer.style.display = 'none';
+        if(hideAlert){
+        } else{
+          alert(`Saving Failed ❌`);
+          alert(msg)
+
+        }
+
+      });
+
+    };
+
+
+
+
+  </script>
+</body>
+
+</html>
